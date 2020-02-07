@@ -1,0 +1,52 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+ul,
+li {
+  list-style: none;
+}
+.content-wrap {
+  position: relative;
+  width: 5.55555556rem;
+  height: 5.55555556rem;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.content-wrap .content {
+  position: absolute;
+  width: 16.66666667rem;
+  height: 100%;
+}
+.content-wrap .content-item {
+  width: 5.55555556rem;
+  height: 100%;
+  float: left;
+  background: green;
+}
+.iconlist {
+  position: relative;
+  height: 0.92592593rem;
+  margin: 0.13888889rem 0 auto;
+}
+.iconlist .iconitem {
+  width: 0.92592593rem;
+  height: 0.92592593rem;
+  float: left;
+  background: black;
+}
+.iconlist .moveborder {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0.87962963rem;
+  height: 0.87962963rem;
+  border: 0.0462963rem solid red;
+  transition: all 0.3s;
+}

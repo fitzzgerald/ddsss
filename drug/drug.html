@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../drug/img/index.css">
+    <script src="../drug/transformCSS.js"></script>
+</head>
+
+<body>
+    <div class="content-wrap">
+        <ul class="content">
+            <li class="content-item">1</li>
+            <li class="content-item">2</li>
+            <li class="content-item">3</li>
+        </ul>
+    </div>
+    <ul class="iconlist">
+        <li class="iconitem"></li>
+        <li class="iconitem"></li>
+        <li class="iconitem"></li>
+        <h4 class="moveborder"></h4>
+    </ul>
+   <button>点赞</button>
+   <span>0</span>
+</body>
+<script>
+    (function () {
+        //适配
+        function shipei() {
+            document.documentElement.style.fontSize = document.documentElement.clientWidth / 10 + 'px';
+        }
+
+        shipei();
+        window.addEventListener('resize', shipei);
+    }());
+    var contentWrap = document.querySelector('.content-wrap');
+    var iconItems = document.querySelectorAll('.iconitem');
+    var moveBorder = document.querySelector('.moveborder');
+    var conTent = document.querySelector('.content');
+    var contentItems = document.querySelectorAll('.content-item');
+    var index = 0;
+    var button = document.querySelector('button');
+    iconItems.forEach(function(item, value){
+        item.index = value;
+        item.addEventListener('touchstart', function () {
+            var left = iconItems[0].offsetWidth * this.index;
+            transformCSS(moveBorder, 'translateX', left);
+            var tx = -this.index * contentItems[0].offsetWidth;
+            transformCSS(conTent, 'translateX', tx);
+            conTent.style.transition = 'all .5s';
+        });
+    });
+contentWrap.addEventListener('touchstart',function(e){
+    containerl = transformCSS(conTent,'translateX');
+    containerX = e.changedTouches[0].clientX;
+    conTent.style.transition = 'none';
+});
+contentWrap.addEventListener('touchmove',function(e){
+    container_X = e.changedTouches[0].clientX;
+    var DisX = container_X - containerX + containerl;
+    transformCSS(conTent, 'translateX', DisX);
+});
+contentWrap.addEventListener('touchend',function(e){
+    var translateX = transformCSS(conTent,'translateX');
+    var index = -Math.round(translateX / contentWrap.offsetWidth);
+    if (index < 0) {
+        index = 0
+    }
+    if (index > 2) {
+        index = 2
+    }
+    var left = iconItems[0].offsetWidth * index
+    transformCSS(moveBorder, 'translateX', left);
+    containerZ = e.changedTouches[0].clientX
+    if (Math.abs(containerZ- containerX) >= contentWrap.offsetWidth/2) {
+        if (index < 0) {
+       index = 0;
+   } 
+   if (index > 2) {
+       index = 2;
+   }
+        
+    }
+    conTent.style.transition = 'all .5s';
+    var newLeft = -index * contentWrap.offsetWidth;
+    transformCSS(conTent, 'translateX', newLeft);
+});
+ function add(){
+    var x = document.querySelector('span').innerHTML;
+    x = parseInt(x) +1;
+    document.querySelector('span').innerHTML = x
+ }
+button.addEventListener('click',function(){
+    add();
+})
+</script>
+
+</html>
